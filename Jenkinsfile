@@ -12,6 +12,15 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/projecti.zip'
             }
         }
+        stage('Install Docker on testserver') {
+             steps {
+                script {
+                    sh "ansible-playbook -i ./home/edureka/myproject/hosts ./home/edureka/myproject/dockerinstall.yaml"
+                    sh "echo 'WE ARE DEPLOYING'"
+                    }
+                }
+            }
+        }
         stage('Build Docker Image') {
              steps {
                 script {
